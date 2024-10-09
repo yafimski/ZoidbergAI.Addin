@@ -118,23 +118,7 @@ namespace Common.Handlers
 
         private string CleanCodeSnippet(string code)
         {
-            string[] lines = code.Trim().Split('\n');
-
-            if (lines[0].Trim().StartsWith("```python"))
-            {
-                lines = lines.Skip(1).ToArray();
-            }
-
-            if (lines[lines.Length - 1].Trim() == "```")
-            {
-                lines = lines.Take(lines.Length - 1).ToArray();
-            }
-
-            string cleanSnippet = string.Join("\n", lines);
-
-            cleanSnippet = cleanSnippet.Replace("\\n", "\n");
-            cleanSnippet = cleanSnippet.Replace("\\_", "_");
-            cleanSnippet = cleanSnippet.Replace("\\*", "*");
+            cleanSnippet = code.Replace("```python", "").Replace("```", "").Replace("\\n", "\n").Replace("\\_", "_").Replace("\\*", "*");
 
             return cleanSnippet;
         }
